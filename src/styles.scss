@@ -1,1 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+@import "src/vars";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px; // set em and rem here for entire application
+  background: $gray7;
+  @include text--gray();
+
+  * {
+    font-family: "Open Sans", sans-serif;
+    outline-color: $accent;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  @include text--gray();
+}
+
+h1 {
+  font-size: $s6;
+}
+
+h2 {
+  font-size: $s5;
+}
+
+h3 {
+  font-size: $s4;
+}
+
+h4 {
+  font-size: $s3;
+}
+
+h5 {
+  font-size: $s2;
+}
+
+h6 {
+  font-size: $s1;
+}
