@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
-@import "src/vars";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import 'src/vars';
 
 body {
   margin: 0;
@@ -10,7 +10,7 @@ body {
   @include text--gray();
 
   * {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     outline-color: $accent;
   }
 }
