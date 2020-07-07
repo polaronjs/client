@@ -12,6 +12,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { FilesComponent } from './pages/files/files.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { MetricsComponent } from './pages/metrics/metrics.component';
+import { MainComponent } from './main.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MetricsComponent } from './pages/metrics/metrics.component';
     FilesComponent,
     SettingsComponent,
     MetricsComponent,
+    MainComponent,
   ],
   imports: [CommonModule, RouterModule.forChild(routes)],
 })

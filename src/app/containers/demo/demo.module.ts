@@ -7,9 +7,10 @@ import { routes } from './demo.routes';
 
 // pages
 import { HomeComponent } from './pages/home/home.component';
+import { DemoComponent } from './demo.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, DemoComponent],
   imports: [CommonModule, RouterModule.forChild(routes)],
 })
 export class DemoModule {}
