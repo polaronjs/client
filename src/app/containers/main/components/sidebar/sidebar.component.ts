@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'p-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements OnInit {
-  constructor() {}
+export class SidebarComponent {
+  @Input() mobile?: boolean;
 
-  ngOnInit(): void {}
+  constructor() {}
 }

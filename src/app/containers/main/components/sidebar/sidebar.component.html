@@ -1,1 +1,32 @@
-<p>sidebar works!</p>
+<div class="sidebar" [ngClass]="{ 'sidebar--mobile': mobile }">
+  <div class="sidebar-top">
+    <div class="sidebar__logo"><p-logo></p-logo></div>
+    <ul>
+      <div class="sidebar__sub-header">Content</div>
+      <a routerLink="articles" routerLinkActive="active">
+        <li><p-icon name="newspaper"></p-icon>Articles</li>
+      </a>
+      <a routerLink="categories" routerLinkActive="active">
+        <li><p-icon name="layer-group"></p-icon>Categories</li>
+      </a>
+      <a routerLink="files" routerLinkActive="active">
+        <li><p-icon name="folder-tree"></p-icon>Files</li>
+      </a>
+      <a routerLink="users" routerLinkActive="active">
+        <li><p-icon name="users"></p-icon>Users</li>
+      </a>
+    </ul>
+    <ul>
+      <div class="sidebar__sub-header">Content</div>
+      <a routerLink="settings" routerLinkActive="active">
+        <li><p-icon name="cog"></p-icon>Settings</li>
+      </a>
+      <a routerLink="metrics" routerLinkActive="active">
+        <li><p-icon name="chart-line"></p-icon>Metrics</li>
+      </a>
+    </ul>
+  </div>
+  <div class="sidebar-bottom">
+    <p-user-menu></p-user-menu>
+  </div>
+</div>

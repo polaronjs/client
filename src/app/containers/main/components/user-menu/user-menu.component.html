@@ -1,0 +1,10 @@
+<div class="user-menu">
+  <div
+    [style.backgroundImage]="'url(' + auth.currentUser.image + ')'"
+    class="user-image"
+  ></div>
+  <div class="user-information">
+    <div class="user__name">{{ auth.currentUser.name }}</div>
+    <div class="user__role">{{ auth.currentUser.accessLevel }}</div>
+  </div>
+</div>

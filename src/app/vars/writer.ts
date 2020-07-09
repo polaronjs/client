@@ -38,11 +38,25 @@ const invertGrays = () => {
     // @ts-ignore type checking doesn't catch, but this will always pass
     vars[keys[i]] = values[i];
   }
-
-  writeVars();
 };
 
 export const toggleDarkMode = (isDarkMode: boolean) => {
   vars.accentColor = vars.accentColor.lighten(isDarkMode ? 5 : -5);
   invertGrays();
+  writeVars();
+};
+
+/**
+ * Set any number of values in the vars object, and trigger a single write action
+ */
+export const setValues = (values: typeof vars) => {
+  for (const [propName, value] of Object.entries(values) as [
+    keyof typeof vars,
+    typeof vars[keyof typeof vars]
+  ][]) {
+    // @ts-ignore type checking doesn't catch, but this will always pass
+    vars[propName] = value;
+  }
+
+  writeVars();
 };

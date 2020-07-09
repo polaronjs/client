@@ -15,7 +15,14 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
-    "lib": ["es2018", "dom"]
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "@core/*": ["src/app/core/*"],
+      "@vars/*": ["src/app/vars/*"],
+      "@included/*": ["src/app/shared/included/*"],
+      "@lazy/*": ["src/app/shared/lazy/*"],
+      "@guards/*": ["src/app/guards/*"]
+    }
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,

@@ -1,0 +1,15 @@
+@import 'vars';
+
+.main {
+  display: grid;
+  grid-template-columns: $sidebarWidth 1fr;
+
+  &.main--mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.main__right {
+  padding: 40px;
+  box-sizing: border-box;
+}

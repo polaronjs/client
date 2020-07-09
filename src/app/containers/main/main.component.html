@@ -1,2 +1,8 @@
-<p>main works!</p>
-<router-outlet></router-outlet>
+<div class="main" [ngClass]="{ 'main--mobile': !!window.activeThreshold }">
+  <div class="main__left">
+    <p-sidebar [mobile]="!!window.activeThreshold"></p-sidebar>
+  </div>
+  <div class="main__right">
+    <router-outlet></router-outlet>
+  </div>
+</div>

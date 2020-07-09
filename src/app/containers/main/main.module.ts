@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 // components
 import { MainComponent } from './main.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { UserMenuComponent } from './components/user-menu/user-menu.component';
 
 // routes
 import { routes } from './main.routes';
@@ -17,6 +18,9 @@ import { FilesComponent } from './pages/files/files.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { MetricsComponent } from './pages/metrics/metrics.component';
 
+// modules
+import { IncludedModule } from '@included/included.module';
+
 @NgModule({
   declarations: [
     ArticlesComponent,
@@ -27,7 +31,8 @@ import { MetricsComponent } from './pages/metrics/metrics.component';
     MetricsComponent,
     MainComponent,
     SidebarComponent,
+    UserMenuComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, RouterModule.forChild(routes), IncludedModule],
 })
 export class MainModule {}
