@@ -1,0 +1,8 @@
+<quill-editor
+  [modules]="modules"
+  [customModules]="customModules"
+  (onContentChanged)="handleChange($event)"
+  (onSelectionChanged)="handleSelectionChange($event)"
+  theme="snow"
+  placeholder="Compose your next great article..."
+></quill-editor>

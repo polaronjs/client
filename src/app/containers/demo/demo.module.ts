@@ -11,8 +11,11 @@ import { routes } from './demo.routes';
 // pages
 import { HomeComponent } from './pages/home/home.component';
 
+// modules
+import { EditorModule } from '@lazy/editor/editor.module';
+
 @NgModule({
   declarations: [HomeComponent, DemoComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, RouterModule.forChild(routes), EditorModule],
 })
 export class DemoModule {}
