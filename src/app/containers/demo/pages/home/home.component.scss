@@ -1,7 +1,23 @@
-.home {
-  padding: 40px;
+@import 'vars';
 
-  h1 {
-    margin-bottom: 20px;
+.home {
+  p-demo-item h4 {
+    margin-bottom: 30px;
+    position: relative;
+
+    &:after {
+      content: '';
+      background: $accent;
+      width: 17px;
+      height: 3px;
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+    }
+  }
+
+  & > *:not(:last-child) {
+    display: block;
+    margin-bottom: 60px;
   }
 }

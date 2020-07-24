@@ -1,1 +1,18 @@
-<router-outlet></router-outlet>
+<div class="demo">
+  <div class="demo__header">
+    <div class="inner">
+      <p-logo [routerLink]="['/']" size="small"></p-logo>
+      <div class="header__menu"></div>
+    </div>
+  </div>
+  <div class="demo__splash">
+    <div class="inner">
+      <h1>Components Demo</h1>
+    </div>
+  </div>
+  <div class="demo__pages">
+    <div class="inner">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -22,7 +22,8 @@
       "@vars/*": ["src/app/vars/*"],
       "@included/*": ["src/app/shared/included/*"],
       "@lazy/*": ["src/app/shared/lazy/*"],
-      "@guards/*": ["src/app/guards/*"]
+      "@guards/*": ["src/app/guards/*"],
+      "@utils/*": ["src/app/utils/*"]
     }
   },
   "angularCompilerOptions": {

@@ -2,6 +2,8 @@
 
 .logo {
   color: $accent;
+  cursor: pointer;
+  @include disable-select();
 
   h2 {
     display: flex;
@@ -10,8 +12,19 @@
     color: inherit;
 
     p-icon {
-      margin-right: 15px;
+      margin-right: 10px;
       font-size: $s6;
+    }
+  }
+
+  &.logo--small {
+    h2 {
+      font-size: $s3;
+
+      p-icon {
+        font-size: $s5;
+        margin-right: 8px;
+      }
     }
   }
 }

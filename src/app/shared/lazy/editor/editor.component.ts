@@ -13,7 +13,6 @@ import { take } from 'rxjs/operators';
 @Component({
   selector: 'p-editor',
   templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.scss'],
 })
 export class EditorComponent {
   // inputs

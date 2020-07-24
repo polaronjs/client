@@ -1,0 +1,8 @@
+@import 'vars';
+
+.demo-item {
+  background: $gray7;
+  padding: 30px;
+  border-radius: $borderRadius2;
+  box-shadow: 0px 15px 30px -15px $gray5;
+}

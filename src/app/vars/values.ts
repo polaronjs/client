@@ -5,7 +5,7 @@ export const config = {
    * The width of the sidebar menu in pixels
    */
   sidebarWidth: new StructureVariable(
-    Math.min(320, window.innerWidth - 50),
+    Math.min(300, window.innerWidth - 50),
     'px'
   ),
 

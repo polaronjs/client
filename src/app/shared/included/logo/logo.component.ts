@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'p-logo',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogoComponent implements OnInit {
   // TODO add vertical display mode?
+
+  @Input() size: 'regular' | 'small' = 'regular';
 
   constructor() {}
 

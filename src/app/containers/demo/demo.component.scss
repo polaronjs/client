@@ -1,0 +1,38 @@
+@import 'vars';
+
+$maxWidth: 1200px;
+
+.inner {
+  max-width: $maxWidth;
+  padding: 0 40px;
+  box-sizing: border-box;
+  margin: auto;
+  position: relative;
+  width: 100%;
+}
+
+.demo__header {
+  padding: 10px 0;
+  position: relative;
+  border-bottom: 2px solid $gray6;
+
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.demo__splash {
+  background: linear-gradient(45deg, $accent-1, $accent);
+  padding: 100px 0;
+
+  h1 {
+    color: $gray7;
+    margin: 0;
+  }
+}
+
+.demo__pages {
+  margin-top: -40px;
+}
