@@ -12,6 +12,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/main/main.module').then((m) => m.MainModule),
   },
+  {
+    path: 'article',
+    loadChildren: () =>
+      import('./pages/new-article/new-article.module').then(
+        (m) => m.NewArticleModule
+      ),
+  },
   { path: '**', redirectTo: 'polaron', pathMatch: 'full' },
 ];
 
