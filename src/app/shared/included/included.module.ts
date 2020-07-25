@@ -5,10 +5,16 @@ import { CommonModule } from '@angular/common';
 import { IconComponent } from './icon/icon.component';
 import { LogoComponent } from './logo/logo.component';
 import { AccessLevelPipe } from './access-level/access-level.pipe';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
-  declarations: [IconComponent, LogoComponent, AccessLevelPipe],
-  exports: [IconComponent, LogoComponent, AccessLevelPipe],
+  declarations: [
+    IconComponent,
+    LogoComponent,
+    AccessLevelPipe,
+    ButtonComponent,
+  ],
+  exports: [IconComponent, LogoComponent, AccessLevelPipe, ButtonComponent],
   imports: [CommonModule],
 })
 export class IncludedModule {}
