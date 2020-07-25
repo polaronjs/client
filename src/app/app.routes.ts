@@ -5,12 +5,12 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () =>
-      import('./containers/auth/auth.module').then((m) => m.AuthModule),
+      import('./pages/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'polaron',
     loadChildren: () =>
-      import('./containers/main/main.module').then((m) => m.MainModule),
+      import('./pages/main/main.module').then((m) => m.MainModule),
   },
   { path: '**', redirectTo: 'polaron', pathMatch: 'full' },
 ];
@@ -22,7 +22,7 @@ if (!environment.production) {
   routes.unshift({
     path: 'demo',
     loadChildren: () =>
-      import('./containers/demo/demo.module').then((m) => m.DemoModule),
+      import('./pages/demo/demo.module').then((m) => m.DemoModule),
   });
 }
 
