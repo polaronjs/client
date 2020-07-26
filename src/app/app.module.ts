@@ -1,6 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, PreloadAllModules } from '@angular/router';
 
 // top-level routes
 import { routes } from './app.routes';
@@ -13,7 +14,11 @@ import { PageLoadProgressComponent } from './components/page-load-progress/page-
 
 @NgModule({
   declarations: [AppComponent, PageLoadProgressComponent],
-  imports: [BrowserModule, RouterModule.forRoot(routes)],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
