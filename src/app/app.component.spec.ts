@@ -1,12 +1,17 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+
+// component under test
 import { AppComponent } from './app.component';
+
+// other components
+import { PageLoadProgressComponent } from './components/page-load-progress/page-load-progress.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [AppComponent],
+      declarations: [AppComponent, PageLoadProgressComponent],
     }).compileComponents();
   }));
 
