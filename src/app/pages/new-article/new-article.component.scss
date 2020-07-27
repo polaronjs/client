@@ -1,0 +1,105 @@
+@import 'vars';
+
+$padding: 40px;
+
+.new-article {
+  display: grid;
+  grid-template-columns: minmax(400px, 2fr) 1fr;
+  min-height: 100vh;
+
+  .editor-wrapper {
+    height: 100%;
+  }
+
+  & > * {
+    padding: $padding 0;
+  }
+}
+
+.left-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.right-wrapper {
+  border-left: 1px solid $gray6;
+}
+
+.new-article__header {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 40px;
+  padding: 0 $padding;
+
+  & > *:nth-child(1) {
+    text-align: left;
+  }
+
+  & > *:nth-child(2) {
+    text-align: center;
+  }
+
+  & > *:nth-child(3) {
+    text-align: right;
+  }
+
+  .faux-input {
+    position: relative;
+    appearance: none;
+    border: 0;
+    background: transparent;
+    font-size: $s3;
+    font-weight: 600;
+    vertical-align: middle;
+
+    &.faux-input--empty:before {
+      content: attr(data-placeholder);
+      position: absolute;
+      color: $gray5;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+  }
+}
+
+.editor-wrapper {
+  padding-left: $padding;
+}
+
+// these styles cascade to child components
+:host .new-article .left-wrapper ::ng-deep quill-editor {
+  .ql-toolbar,
+  .ql-container {
+    border: 0;
+    padding: 10px 0;
+  }
+
+  .ql-toolbar {
+    border-bottom: 1px solid $gray6;
+    padding: 8px 0;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+  }
+
+  .ql-editor {
+    padding-right: $padding;
+    padding-left: 0;
+
+    &:before {
+      font-style: normal;
+      color: $gray5;
+      font-size: $s0 !important;
+      left: 0;
+    }
+  }
+
+  .ql-container {
+    font-size: 16px !important;
+  }
+}

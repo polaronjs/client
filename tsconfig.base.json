@@ -18,6 +18,7 @@
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
+      "@entities": ["src/app/entities"],
       "@core/*": ["src/app/core/*"],
       "@vars/*": ["src/app/vars/*"],
       "@included/*": ["src/app/shared/included/*"],

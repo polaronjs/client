@@ -1,1 +1,30 @@
-<p>new-article works!</p>
+<div class="new-article">
+  <div class="left-wrapper">
+    <header class="new-article__header">
+      <div>
+        <p-button (click)="navigateBack()" buttonType="link">Back</p-button>
+      </div>
+      <div>
+        <div
+          #titleElement
+          (input)="updateArticle({ title: $event })"
+          [ngClass]="{ 'faux-input--empty': !article?.title }"
+          class="faux-input"
+          contenteditable="true"
+          data-placeholder="Untitled Article"
+        ></div>
+      </div>
+      <div>
+        <p-button>Save Article</p-button>
+      </div>
+    </header>
+    <div class="editor-wrapper">
+      <p-editor
+        [content]="article?.body || ''"
+        (onEditorCreated)="onEditorCreated($event)"
+        (onChange)="updateArticle({ body: $event })"
+      ></p-editor>
+    </div>
+  </div>
+  <div class="right-wrapper"></div>
+</div>

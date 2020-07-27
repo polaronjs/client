@@ -5,7 +5,9 @@ import ImageResize from 'quill-image-resize-module';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-/* TODO:NICK
+export type TextEditor = Quill;
+
+/* TODO:NickW
   This component needs tests, but the ImageResize module is throwing an error that I can't resolve
   TypeError: Cannot read property 'imports' of undefined
 */
@@ -19,6 +21,7 @@ export class EditorComponent {
   @Input() content!: string;
 
   // outputs
+  @Output() onEditorCreated = new EventEmitter<any>();
   @Output() private onChange = new EventEmitter<string>();
   @Output() private videoOpen = new EventEmitter<Subject<string>>();
   @Output() private imageOpen = new EventEmitter<Subject<string>>();
@@ -74,14 +77,14 @@ export class EditorComponent {
 
     if (range) {
       // we now know that both the range and this.editor are defined
-      // so we can proceed to add the image
+      // so we can proceed to add the media
       this.editor!.insertEmbed(range.index, type, url);
     }
   }
 
-  handleChange({ editor }: { editor: Quill }) {
+  handleChange({ html, editor }: { html: string | null; editor: Quill }) {
     this.updateEditor(editor);
-    this.onChange.emit(editor.getText());
+    this.onChange.emit(html || '');
   }
 
   handleSelectionChange({ editor }: { editor: Quill }) {

@@ -6,10 +6,11 @@ import { EditorComponent } from './editor.component';
 
 // modules
 import { QuillModule } from 'ngx-quill';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [EditorComponent],
   exports: [EditorComponent],
-  imports: [CommonModule, QuillModule.forRoot()],
+  imports: [CommonModule, QuillModule.forRoot(), FormsModule],
 })
 export class EditorModule {}
