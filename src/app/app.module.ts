@@ -17,7 +17,7 @@ import { PageLoadProgressComponent } from './components/page-load-progress/page-
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    RouterModule.forRoot(routes),
   ],
   providers: [],
   bootstrap: [AppComponent],
