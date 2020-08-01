@@ -1,8 +1,8 @@
 @import 'vars';
 
 .page-load-progress {
-  background: $accent-2;
-  height: 4px;
+  background: $accent;
+  height: 5px;
   width: 100%;
   position: fixed;
   left: 0;
@@ -12,7 +12,7 @@
   opacity: 0;
   transform: scale(0, 1);
   transform-origin: left;
-  transition: all 0.3s ease;
+  transition: all 0.35s ease;
 
   &.page-load-progress__loading {
     transform: scale(0.3, 1);
@@ -20,7 +20,7 @@
   }
 
   &.page-load-progress__complete {
+    transition-duration: 0.5s;
     transform: scale(1);
-    opacity: 0;
   }
 }

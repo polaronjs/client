@@ -37,7 +37,7 @@ export class PageLoadProgressComponent implements OnInit {
 
     setTimeout(() => {
       this.loading = 0;
-    }, 300);
+    }, 515);
   }
 
   ngOnDestroy() {
