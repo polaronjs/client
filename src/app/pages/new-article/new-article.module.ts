@@ -10,8 +10,8 @@ import { NewArticleComponent } from './new-article.component';
 
 // modules
 import { EditorModule } from '@lazy/editor/editor.module';
-import { PortalModule } from '@lazy/portal/portal.module';
 import { IncludedModule } from '@included/included.module';
+import { PopoverModule } from '@lazy/popover/popover.module';
 
 @NgModule({
   declarations: [NewArticleComponent],
@@ -20,7 +20,7 @@ import { IncludedModule } from '@included/included.module';
     RouterModule.forChild(routes),
     EditorModule,
     IncludedModule,
-    PortalModule,
+    PopoverModule,
   ],
 })
 export class NewArticleModule {}

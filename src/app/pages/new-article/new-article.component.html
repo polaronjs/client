@@ -26,5 +26,21 @@
       ></p-editor>
     </div>
   </div>
-  <div class="right-wrapper"></div>
+  <div class="right-wrapper">
+    <ng-template #buttonPopoverHandle>
+      <p-button (click)="value = !value" buttonSize="small">Big Test</p-button>
+    </ng-template>
+    <p-popover
+      [handle]="buttonPopoverHandle"
+      [visible]="value"
+      [backdropVisible]="true"
+      [trapFocus]="true"
+      [closeOnBackdropClick]="true"
+      (close)="value = false"
+    >
+      <div class="test">
+        Are you sure about that one, captain?
+      </div>
+    </p-popover>
+  </div>
 </div>

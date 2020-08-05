@@ -16,6 +16,8 @@ export class NewArticleComponent implements AfterViewInit {
 
   article!: Article;
 
+  value = false;
+
   constructor(private location: Location) {}
 
   ngAfterViewInit() {

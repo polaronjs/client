@@ -35,6 +35,10 @@ export class PortalComponent implements AfterContentInit, OnDestroy {
   ) {}
 
   ngAfterContentInit() {
+    if (!this.content) {
+      console.error('Type error: cannot create a portal with no content');
+    }
+
     // create a new PortalHostComponent and project our content into it
     this.viewer = this.componentFactoryResolver
       .resolveComponentFactory(PortalHostComponent)

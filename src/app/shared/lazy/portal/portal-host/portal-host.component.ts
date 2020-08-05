@@ -6,7 +6,6 @@ import {
   AfterViewInit,
   ViewChild,
 } from '@angular/core';
-import { query, animateChild, trigger, transition } from '@angular/animations';
 import { Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
@@ -14,10 +13,7 @@ import { filter, take } from 'rxjs/operators';
 
 @Component({
   selector: 'p-portal-host',
-  template: '<div *ngIf="showing" [@host] #host></div>',
-  animations: [
-    trigger('host', [transition(':leave', [query('@*', animateChild())])]),
-  ],
+  template: '<div *ngIf="showing" #host></div>',
 })
 export class PortalHostComponent implements AfterViewInit {
   @ViewChild('host', { read: ViewContainerRef })

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
-export const WindowThresholds = {
+export const WindowWidthThresholds = {
   mobile: 500,
   tablet: 1000,
 };
@@ -9,24 +10,41 @@ export const WindowThresholds = {
   providedIn: 'root',
 })
 export class WindowService {
-  // @ts-ignore this is DEFINITELY set in the constructor since we called the `calculate` function
-  activeThreshold: keyof typeof WindowThresholds | null;
+  activeThreshold!: keyof typeof WindowWidthThresholds | null;
+  resize: Subject<{ w: number; h: number }> = new Subject();
+
+  scrollYPosition!: number;
+  scrollXPosition!: number;
+  scroll: Subject<{ x: number; y: number }> = new Subject();
 
   constructor() {
     window.onresize = () => {
-      this.calculate();
+      this.getDimensions();
     };
 
-    this.calculate();
+    window.onscroll = () => {
+      this.getScrollValues();
+    };
+
+    this.getDimensions();
   }
 
-  private calculate() {
-    if (window.innerWidth <= WindowThresholds.mobile) {
+  private getScrollValues() {
+    this.scrollXPosition = window.scrollX;
+    this.scrollYPosition = window.scrollY;
+
+    this.scroll.next({ x: this.scrollXPosition, y: this.scrollYPosition });
+  }
+
+  private getDimensions() {
+    if (window.innerWidth <= WindowWidthThresholds.mobile) {
       this.activeThreshold = 'mobile';
-    } else if (window.innerWidth <= WindowThresholds.tablet) {
+    } else if (window.innerWidth <= WindowWidthThresholds.tablet) {
       this.activeThreshold = 'tablet';
     } else {
       this.activeThreshold = null;
     }
+
+    this.resize.next({ w: window.innerWidth, h: window.innerHeight });
   }
 }
