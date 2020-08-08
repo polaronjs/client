@@ -39,14 +39,14 @@ import { takeUntil } from 'rxjs/operators';
         style({ opacity: 0 }),
         group([
           query('@*', animateChild(), { optional: true }),
-          animate('300ms ease', style({ opacity: 0.8 })),
+          animate('200ms ease', style({ opacity: 0.8 })),
         ]),
       ]),
       transition(':leave', [
         style({ opacity: 0.8 }),
         group([
           query('@*', animateChild(), { optional: true }),
-          animate('300ms 100ms ease', style({ opacity: 0 })),
+          animate('200ms 100ms ease', style({ opacity: 0 })),
         ]),
       ]),
     ]),
@@ -55,14 +55,14 @@ import { takeUntil } from 'rxjs/operators';
         style({ opacity: 0 }),
         group([
           query('@*', animateChild(), { optional: true }),
-          animate('300ms {{ delay }} ease', style({ opacity: 1 })),
+          animate('200ms {{ delay }} ease', style({ opacity: 1 })),
         ]),
       ]),
       transition(':leave', [
         style({ opacity: 1 }),
         group([
           query('@*', animateChild(), { optional: true }),
-          animate('300ms ease', style({ opacity: 0 })),
+          animate('200ms ease', style({ opacity: 0 })),
         ]),
       ]),
     ]),
