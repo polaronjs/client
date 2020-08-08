@@ -39,14 +39,14 @@ import { takeUntil } from 'rxjs/operators';
         style({ opacity: 0 }),
         group([
           query('@*', animateChild(), { optional: true }),
-          animate('200ms ease', style({ opacity: 0.8 })),
+          animate('250ms ease', style({ opacity: 0.8 })),
         ]),
       ]),
       transition(':leave', [
         style({ opacity: 0.8 }),
         group([
           query('@*', animateChild(), { optional: true }),
-          animate('200ms 100ms ease', style({ opacity: 0 })),
+          animate('250ms 100ms ease', style({ opacity: 0 })),
         ]),
       ]),
     ]),
@@ -55,14 +55,14 @@ import { takeUntil } from 'rxjs/operators';
         style({ opacity: 0 }),
         group([
           query('@*', animateChild(), { optional: true }),
-          animate('200ms {{ delay }} ease', style({ opacity: 1 })),
+          animate('250ms {{ delay }} ease', style({ opacity: 1 })),
         ]),
       ]),
       transition(':leave', [
         style({ opacity: 1 }),
         group([
           query('@*', animateChild(), { optional: true }),
-          animate('200ms ease', style({ opacity: 0 })),
+          animate('250ms ease', style({ opacity: 0 })),
         ]),
       ]),
     ]),
@@ -138,7 +138,7 @@ export class PopoverComponent implements OnInit {
    * [beta] Currently only focuses popover on initial open, does not trap focus.
    * Intended to specify whether or not the user's keyboard should be "trapped" inside the popover until closed.
    */
-  @Input() trapFocus?: boolean;
+  trapFocus?: boolean;
 
   /**
    * Fired when a close event has been generated internally by the popover component
@@ -186,8 +186,6 @@ export class PopoverComponent implements OnInit {
         if (this.visible) {
           this.calculatePosition();
         }
-
-        this.triggerFocusUpdate();
       });
   }
 
@@ -224,6 +222,7 @@ export class PopoverComponent implements OnInit {
       (this.windowService.scrollXPosition || 0);
   }
 
+  // TODO:NickW implement this
   private triggerFocusUpdate() {
     if (this.visible) {
       this.previouslyFocusedElement = document.activeElement as HTMLElement;

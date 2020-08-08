@@ -12,12 +12,11 @@
       *ngIf="visible"
       [@popover]="{
         value: ':enter',
-        params: { delay: backdropVisible ? '150ms' : '0ms' }
+        params: { delay: backdropVisible ? '100ms' : '0ms' }
       }"
       [style.top]="(topPosition || 0) + 'px'"
       [style.left]="(leftPosition || 0) + 'px'"
       class="popover"
-      tabindex="0"
     >
       <ng-content></ng-content>
     </div>
