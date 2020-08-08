@@ -17,8 +17,12 @@
       [style.top]="(topPosition || 0) + 'px'"
       [style.left]="(leftPosition || 0) + 'px'"
       class="popover"
+      [ngClass]="{ 'popover--center': !this.handle }"
+      (click)="closeOnBackdropClick && !this.handle && close.emit()"
     >
-      <ng-content></ng-content>
+      <div (click)="$event.stopPropagation()">
+        <ng-content></ng-content>
+      </div>
     </div>
   </ng-template>
 </p-portal>

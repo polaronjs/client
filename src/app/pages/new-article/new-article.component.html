@@ -27,11 +27,8 @@
     </div>
   </div>
   <div class="right-wrapper">
-    <ng-template #buttonPopoverHandle>
-      <p-button (click)="value = !value" buttonSize="small">Big Test</p-button>
-    </ng-template>
+    <p-button (click)="value = !value" buttonSize="small">Big Test</p-button>
     <p-popover
-      [handle]="buttonPopoverHandle"
       [visible]="value"
       [backdropVisible]="true"
       [closeOnBackdropClick]="true"

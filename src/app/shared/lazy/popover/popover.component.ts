@@ -23,7 +23,7 @@ import {
 } from '@angular/animations';
 import { Subject } from 'rxjs';
 import { WindowService } from '@core/window';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, filter } from 'rxjs/operators';
 
 // TODO:NickW Add option to render handle in portal as well as popover, i.e. product tours
 
@@ -176,12 +176,17 @@ export class PopoverComponent implements OnInit {
       }
     });
 
-    this.createHandleElement();
+    if (this.handle) {
+      this.createHandleElement();
+    }
   }
 
   ngAfterViewInit() {
     this.popoverElement.changes
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(
+        takeUntil(this.destroyed$),
+        filter(() => !!this.handle)
+      )
       .subscribe(() => {
         if (this.visible) {
           this.calculatePosition();
@@ -209,17 +214,19 @@ export class PopoverComponent implements OnInit {
   }
 
   private calculatePosition(element = this.positionRefElement) {
-    this.topPosition =
-      element.offsetTop +
-      (this.verticalAlignment === 'bottom' ? element.offsetHeight : 0) +
-      this.topOffset -
-      (this.windowService.scrollYPosition || 0);
+    if (element) {
+      this.topPosition =
+        element.offsetTop +
+        (this.verticalAlignment === 'bottom' ? element.offsetHeight : 0) +
+        this.topOffset -
+        (this.windowService.scrollYPosition || 0);
 
-    this.leftPosition =
-      element.offsetLeft +
-      (this.horizontalAlignment === 'right' ? element.offsetWidth : 0) +
-      this.leftOffset -
-      (this.windowService.scrollXPosition || 0);
+      this.leftPosition =
+        element.offsetLeft +
+        (this.horizontalAlignment === 'right' ? element.offsetWidth : 0) +
+        this.leftOffset -
+        (this.windowService.scrollXPosition || 0);
+    }
   }
 
   // TODO:NickW implement this
