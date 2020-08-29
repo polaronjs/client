@@ -1,0 +1,55 @@
+@import 'vars';
+
+.select {
+  appearance: none;
+  background: transparent;
+  font-size: $s-1;
+  border: 1px solid $gray5;
+  padding: 8px 16px;
+  border-radius: $borderRadius2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+  min-width: 120px;
+
+  span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  p-icon {
+    margin-left: 10px;
+    color: $accent;
+  }
+
+  &.select--empty {
+    color: $gray4 !important;
+  }
+
+  &.select--block {
+    width: 100%;
+  }
+}
+
+.icon {
+  display: block;
+  transition: all 0.25s ease;
+}
+
+.icon--inverted {
+  transform: rotateX(180deg);
+}
+
+::ng-deep li {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
+  white-space: nowrap;
+
+  &.selected {
+    background: $gray6;
+  }
+}

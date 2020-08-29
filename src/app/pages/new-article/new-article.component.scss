@@ -1,6 +1,7 @@
 @import 'vars';
 
-$padding: 40px;
+$leftPadding: 30px;
+$rightPadding: 15px;
 
 .new-article {
   display: grid;
@@ -12,7 +13,7 @@ $padding: 40px;
   }
 
   & > * {
-    padding: $padding 0;
+    padding: $leftPadding 0;
   }
 
   .left-wrapper {
@@ -23,8 +24,12 @@ $padding: 40px;
 
   .right-wrapper {
     border-left: 1px solid $gray6;
-    padding: $padding;
+    padding: $leftPadding;
     box-sizing: border-box;
+
+    & > * {
+      margin-bottom: 20px;
+    }
   }
 }
 
@@ -33,7 +38,7 @@ $padding: 40px;
   align-items: center;
   grid-template-columns: 0.5fr 1fr 0.5fr;
   margin-bottom: 40px;
-  padding: 0 $padding;
+  padding: 0 $leftPadding;
 
   & > *:nth-child(1) {
     text-align: left;
@@ -69,7 +74,7 @@ $padding: 40px;
 }
 
 .editor-wrapper {
-  padding-left: $padding;
+  padding-left: $leftPadding;
 }
 
 // these styles cascade to child components
@@ -90,7 +95,7 @@ $padding: 40px;
   }
 
   .ql-editor {
-    padding-right: $padding;
+    padding-right: $leftPadding;
     padding-left: 0;
 
     &:before {

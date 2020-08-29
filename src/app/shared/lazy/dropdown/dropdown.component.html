@@ -1,0 +1,15 @@
+<p-popover
+  [handle]="handle"
+  [visible]="visible"
+  [closeOnClickOutside]="true"
+  [closeOnEscape]="true"
+  [closeOnScroll]="true"
+  (close)="close.emit()"
+>
+  <div
+    [ngStyle]="{ 'min-width': minDropdownWidth + 'px' }"
+    class="dropdown-body"
+  >
+    <ng-content></ng-content>
+  </div>
+</p-popover>

@@ -1,5 +1,7 @@
 <button class="button" [ngClass]="classes">
-  <ng-content></ng-content>
+  <span class="button__text">
+    <ng-content></ng-content>
+  </span>
   <div class="button__icon">
     <ng-content select="[icon]"></ng-content>
   </div>

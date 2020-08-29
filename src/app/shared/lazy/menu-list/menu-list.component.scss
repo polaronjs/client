@@ -1,0 +1,33 @@
+@import 'vars';
+
+ul {
+  margin: 0;
+  padding: 0;
+
+  &::ng-deep > li {
+    list-style-type: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: $s-1;
+    color: $gray2;
+
+    p-icon {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    &:hover {
+      background: $accent;
+      color: white;
+    }
+
+    &.danger {
+      color: $danger;
+
+      &:hover {
+        color: white;
+        background: $danger;
+      }
+    }
+  }
+}

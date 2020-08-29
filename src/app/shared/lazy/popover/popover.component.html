@@ -3,24 +3,24 @@
     <div
       *ngIf="visible && backdropVisible"
       [@backdrop]
-      (click)="closeOnBackdropClick && close.emit()"
       class="backdrop"
       [ngClass]="{ 'backdrop--light': lightBackdrop }"
     ></div>
     <div
       #popoverElement
-      *ngIf="visible"
       [@popover]="{
         value: ':enter',
         params: { delay: backdropVisible ? '100ms' : '0ms' }
       }"
-      [style.top]="(topPosition || 0) + 'px'"
-      [style.left]="(leftPosition || 0) + 'px'"
+      *ngIf="visible"
+      [ngStyle]="{
+        top: (topPosition || 0) + 'px',
+        left: (leftPosition || 0) + 'px'
+      }"
       class="popover"
       [ngClass]="{ 'popover--center': !this.handle }"
-      (click)="closeOnBackdropClick && !this.handle && close.emit()"
     >
-      <div (click)="$event.stopPropagation()">
+      <div (click)="$event.preventDefault()">
         <ng-content></ng-content>
       </div>
     </div>

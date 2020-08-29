@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 // component under test
 import { PopoverComponent } from './popover.component';
@@ -13,7 +14,7 @@ describe('PopoverComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PopoverComponent],
-      imports: [PortalModule],
+      imports: [PortalModule, NoopAnimationsModule],
     }).compileComponents();
   }));
 

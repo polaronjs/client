@@ -20,7 +20,7 @@ export class AuthService {
     name: 'Nick Winner',
     email: 'design@winnerdigital.net',
     image:
-      'https://media-exp1.licdn.com/dms/image/C5103AQGe7loa0_DtIg/profile-displayphoto-shrink_400_400/0?e=1597881600&v=beta&t=__sc-nVDGbW5opyl0z_ViyXq4SA7OCNmulZWGr65EgM',
+      'https://avatars3.githubusercontent.com/u/7431390?s=460&u=aae814429544d7da1d6c4761e4dd5cc5d061be23&v=4',
     accessLevel: 3,
   };
 

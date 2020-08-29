@@ -11,7 +11,7 @@ import { NewArticleComponent } from './new-article.component';
 // modules
 import { EditorModule } from '@lazy/editor/editor.module';
 import { IncludedModule } from '@included/included.module';
-import { PopoverModule } from '@lazy/popover/popover.module';
+import { SelectModule } from '@lazy/select/select.module';
 
 @NgModule({
   declarations: [NewArticleComponent],
@@ -20,7 +20,7 @@ import { PopoverModule } from '@lazy/popover/popover.module';
     RouterModule.forChild(routes),
     EditorModule,
     IncludedModule,
-    PopoverModule,
+    SelectModule,
   ],
 })
 export class NewArticleModule {}

@@ -1,4 +1,10 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { Location } from '@angular/common';
 
 // types
@@ -18,11 +24,17 @@ export class NewArticleComponent implements AfterViewInit {
 
   value = false;
 
-  constructor(private location: Location) {}
+  selectOptions: string[] = ['one', 'two', 'three'];
+
+  currentlySelectedOption?: string;
+
+  constructor(private location: Location, private cd: ChangeDetectorRef) {}
 
   ngAfterViewInit() {
     this.titleElement.nativeElement.textContent =
       this.article?.title?.toString() || '';
+
+    this.cd.detectChanges();
   }
 
   onEditorCreated(TextEditor: TextEditor) {

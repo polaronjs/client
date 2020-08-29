@@ -1,0 +1,32 @@
+<ng-template #menuHandle>
+  <button
+    #selectButtonElement
+    (click)="open = !open"
+    class="select"
+    [ngClass]="{ 'select--empty': !selected, 'select--block': block }"
+  >
+    <span>{{ selected ? selected : placeholder }}</span>
+    <p-icon
+      class="icon"
+      [ngClass]="{ 'icon--inverted': open }"
+      icon
+      name="angle-down"
+    ></p-icon>
+  </button>
+</ng-template>
+<p-dropdown [handle]="menuHandle" [visible]="!!open" (close)="open = false">
+  <div [ngStyle]="{ minWidth: buttonWidth + 'px' }">
+    <p-menu-list>
+      <ng-template *ngFor="let option of options">
+        <li
+          [ngClass]="{
+            selected: selected && selected === option
+          }"
+          (click)="selectedChange.emit(option); close()"
+        >
+          {{ option }}
+        </li>
+      </ng-template>
+    </p-menu-list>
+  </div>
+</p-dropdown>

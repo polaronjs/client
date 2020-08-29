@@ -11,23 +11,18 @@ import {
   HostListener,
   ViewChildren,
   QueryList,
+  ChangeDetectorRef,
 } from '@angular/core';
-import {
-  trigger,
-  transition,
-  style,
-  animate,
-  group,
-  query,
-  animateChild,
-} from '@angular/animations';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { Subject } from 'rxjs';
 import { WindowService } from '@core/window';
-import { takeUntil, filter } from 'rxjs/operators';
+import { takeUntil, filter, timestamp } from 'rxjs/operators';
 
 // TODO:NickW Add option to render handle in portal as well as popover, i.e. product tours
 
 // TODO:NickW Implement actual focus trapping
+
+// TODO:NickW Allow overridden animations
 
 @Component({
   selector: 'p-popover',
@@ -37,33 +32,24 @@ import { takeUntil, filter } from 'rxjs/operators';
     trigger('backdrop', [
       transition(':enter', [
         style({ opacity: 0 }),
-        group([
-          query('@*', animateChild(), { optional: true }),
-          animate('250ms ease', style({ opacity: 0.8 })),
-        ]),
+        animate('250ms ease', style({ opacity: 0.8 })),
       ]),
       transition(':leave', [
         style({ opacity: 0.8 }),
-        group([
-          query('@*', animateChild(), { optional: true }),
-          animate('250ms 100ms ease', style({ opacity: 0 })),
-        ]),
+        animate('250ms 100ms ease', style({ opacity: 0 })),
       ]),
     ]),
     trigger('popover', [
       transition(':enter', [
-        style({ opacity: 0 }),
-        group([
-          query('@*', animateChild(), { optional: true }),
-          animate('250ms {{ delay }} ease', style({ opacity: 1 })),
-        ]),
+        style({ opacity: 0, transform: 'scale(0.95)' }),
+        animate(
+          '150ms {{ delay }} ease',
+          style({ opacity: 1, transform: 'scale(1)' })
+        ),
       ]),
       transition(':leave', [
-        style({ opacity: 1 }),
-        group([
-          query('@*', animateChild(), { optional: true }),
-          animate('250ms ease', style({ opacity: 0 })),
-        ]),
+        style({ opacity: 1, transform: 'scale(1)' }),
+        animate('150ms ease', style({ opacity: 0, transform: 'scale(0.95)' })),
       ]),
     ]),
   ],
@@ -115,9 +101,8 @@ export class PopoverComponent implements OnInit {
 
   /**
    * Specifies whether or not clicking the backdrop should close the popover.
-   * Only available if [backdropVisible] is true.
    */
-  @Input() closeOnBackdropClick?: boolean;
+  @Input() closeOnClickOutside?: boolean;
 
   /**
    * Specifies whether or not scrolling the window should close the popover
@@ -160,7 +145,8 @@ export class PopoverComponent implements OnInit {
 
   constructor(
     private viewRef: ViewContainerRef,
-    private windowService: WindowService
+    private windowService: WindowService,
+    private cd: ChangeDetectorRef
   ) {}
 
   private get positionRefElement() {
@@ -182,6 +168,11 @@ export class PopoverComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    if (this.popoverElement.first) {
+      this.calculatePosition();
+      this.cd.detectChanges();
+    }
+
     this.popoverElement.changes
       .pipe(
         takeUntil(this.destroyed$),
@@ -190,6 +181,14 @@ export class PopoverComponent implements OnInit {
       .subscribe(() => {
         if (this.visible) {
           this.calculatePosition();
+
+          if (this.closeOnClickOutside) {
+            this.toggleBodyClickHandler(true);
+          }
+        } else {
+          if (this.closeOnClickOutside) {
+            this.toggleBodyClickHandler(false);
+          }
         }
       });
   }
@@ -200,6 +199,23 @@ export class PopoverComponent implements OnInit {
       this.close.emit();
     }
   }
+
+  private bodyClickHandler = ((event: MouseEvent) => {
+    if (!event.defaultPrevented) {
+      this.triggerClose();
+    }
+  }).bind(this);
+
+  private toggleBodyClickHandler(on?: boolean) {
+    setTimeout(() => {
+      if (on) {
+        document.body.addEventListener('click', this.bodyClickHandler);
+      } else {
+        document.body.removeEventListener('click', this.bodyClickHandler);
+      }
+    });
+  }
+
   private createHandleElement() {
     // check for a handle template ref and create the embedded view
     if (this.handle && this.handle instanceof TemplateRef) {
@@ -246,5 +262,11 @@ export class PopoverComponent implements OnInit {
   ngOnDestroy() {
     this.destroyed$.next();
     this.destroyed$.unsubscribe();
+
+    document.body.removeEventListener('click', (event: MouseEvent) => {
+      if (!event.defaultPrevented) {
+        this.triggerClose();
+      }
+    });
   }
 }
