@@ -1,0 +1,88 @@
+@import 'vars';
+
+.tags__search {
+  $searchPadding: 8px;
+  position: relative;
+  background: white;
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 10px;
+
+  input {
+    appearance: none;
+    border: 2px solid $gray6;
+    border-radius: $borderRadius2;
+    padding: $searchPadding;
+    padding-left: 35px;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  p-icon {
+    display: block;
+    position: absolute;
+    left: 12px;
+    color: $gray4;
+  }
+}
+
+.tags__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-left: -4px;
+  margin-right: -4px;
+
+  & > * {
+    margin: 4px;
+    position: relative;
+  }
+}
+
+.tags__dropdown {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 50px;
+
+  .dropdown-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $modalBackground;
+    text-align: center;
+    font-size: $s-1;
+
+    p-icon {
+      margin-right: 10px;
+    }
+  }
+
+  .dropdown-results {
+    display: flex;
+    align-items: center;
+
+    p-menu-list {
+      width: 100%;
+    }
+  }
+}
+
+.empty-tags,
+.empty-results {
+  color: $gray4;
+  font-size: $s-1;
+}
+
+.empty-results {
+  padding: 10px;
+}

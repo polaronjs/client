@@ -16,7 +16,8 @@ import {
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Subject } from 'rxjs';
 import { WindowService } from '@core/window';
-import { takeUntil, filter, timestamp } from 'rxjs/operators';
+import { takeUntil, filter } from 'rxjs/operators';
+import { PortalDestroyEvent, PortalDestroyReason } from '@lazy/portal/typings';
 
 // TODO:NickW Add option to render handle in portal as well as popover, i.e. product tours
 
@@ -130,6 +131,8 @@ export class PopoverComponent implements OnInit {
    */
   @Output() close = new EventEmitter<void>();
 
+  ignoreNextClick?: boolean;
+
   topPosition?: number;
 
   leftPosition?: number;
@@ -168,29 +171,8 @@ export class PopoverComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    if (this.popoverElement.first) {
-      this.calculatePosition();
-      this.cd.detectChanges();
-    }
-
-    this.popoverElement.changes
-      .pipe(
-        takeUntil(this.destroyed$),
-        filter(() => !!this.handle)
-      )
-      .subscribe(() => {
-        if (this.visible) {
-          this.calculatePosition();
-
-          if (this.closeOnClickOutside) {
-            this.toggleBodyClickHandler(true);
-          }
-        } else {
-          if (this.closeOnClickOutside) {
-            this.toggleBodyClickHandler(false);
-          }
-        }
-      });
+    this.calculatePosition();
+    this.cd.detectChanges();
   }
 
   @HostListener('window:keyup', ['$event.key'])
@@ -200,20 +182,17 @@ export class PopoverComponent implements OnInit {
     }
   }
 
-  private bodyClickHandler = ((event: MouseEvent) => {
-    if (!event.defaultPrevented) {
-      this.triggerClose();
-    }
-  }).bind(this);
-
-  private toggleBodyClickHandler(on?: boolean) {
-    setTimeout(() => {
-      if (on) {
-        document.body.addEventListener('click', this.bodyClickHandler);
+  handlePortalDestroyRequest(event: PortalDestroyEvent) {
+    if (
+      event.reason === PortalDestroyReason.CLICK &&
+      this.closeOnClickOutside
+    ) {
+      if (this.ignoreNextClick) {
+        this.ignoreNextClick = false;
       } else {
-        document.body.removeEventListener('click', this.bodyClickHandler);
+        this.triggerClose();
       }
-    });
+    }
   }
 
   private createHandleElement() {
@@ -222,6 +201,10 @@ export class PopoverComponent implements OnInit {
       this.embeddedViewRef = this.viewRef.createEmbeddedView(
         this.handle as TemplateRef<any>
       );
+
+      (this.embeddedViewRef?.rootNodes[0] as HTMLElement).onclick = () => {
+        this.ignoreNextClick = true;
+      };
     } else {
       console.error(
         'Unknown type: Value passed to positionRefElement must be a TemplateRef.'
@@ -262,11 +245,5 @@ export class PopoverComponent implements OnInit {
   ngOnDestroy() {
     this.destroyed$.next();
     this.destroyed$.unsubscribe();
-
-    document.body.removeEventListener('click', (event: MouseEvent) => {
-      if (!event.defaultPrevented) {
-        this.triggerClose();
-      }
-    });
   }
 }

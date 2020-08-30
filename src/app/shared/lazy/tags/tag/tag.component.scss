@@ -1,0 +1,39 @@
+@import 'vars';
+
+:host {
+  display: block;
+  overflow: hidden;
+}
+
+.tag {
+  text-transform: capitalize;
+  padding: 6px 12px;
+  font-size: $s-1;
+  background: $gray6;
+  color: $gray2;
+  border-radius: $borderRadius2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  button {
+    appearance: none;
+    background: 0;
+    padding: 1px 2px;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    margin-top: 1px;
+    margin-left: 10px;
+    box-sizing: border-box;
+    outline: 0;
+    box-sizing: border-box;
+  }
+}

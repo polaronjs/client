@@ -1,4 +1,4 @@
-<p-portal>
+<p-portal (requestToDestroy)="handlePortalDestroyRequest($event)">
   <ng-template>
     <div
       *ngIf="visible && backdropVisible"
@@ -20,9 +20,7 @@
       class="popover"
       [ngClass]="{ 'popover--center': !this.handle }"
     >
-      <div (click)="$event.preventDefault()">
-        <ng-content></ng-content>
-      </div>
+      <ng-content></ng-content>
     </div>
   </ng-template>
 </p-portal>

@@ -9,10 +9,13 @@ import {
   ApplicationRef,
   TemplateRef,
   AfterContentInit,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { PortalHostComponent } from './portal-host/portal-host.component';
 import { Subject } from 'rxjs';
-import { take, filter } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
+import { PortalDestroyEvent } from './typings';
 
 @Component({
   selector: 'p-portal',
@@ -22,11 +25,13 @@ export class PortalComponent implements AfterContentInit, OnDestroy {
   @ContentChild(TemplateRef)
   content!: TemplateRef<HTMLElement>;
 
+  @Output() requestToDestroy = new EventEmitter<PortalDestroyEvent>();
+
   // instance of PortalHostComponent to be populated from the content variable and injected into the DOM
   private viewer!: ComponentRef<PortalHostComponent>;
 
   private componentDestroyed$: Subject<void> = new Subject();
-  private destroyer$ = new Subject<0 | 1>();
+  private destroyer$ = new Subject<PortalDestroyEvent>();
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -58,18 +63,20 @@ export class PortalComponent implements AfterContentInit, OnDestroy {
       .rootNodes[0] as HTMLElement;
 
     document.body.appendChild(domElem);
+
+    this.destroyer$
+      .pipe(takeUntil(this.componentDestroyed$))
+      .subscribe((value) => {
+        if (value.status === 1) {
+          this.destroy();
+        } else {
+          this.requestToDestroy.emit(value);
+        }
+      });
   }
 
   ngOnDestroy() {
-    this.destroyer$
-      .pipe(
-        filter((value) => !!value),
-        take(1)
-      )
-      .subscribe(() => {
-        this.destroy();
-      });
-    this.destroyer$.next(0);
+    this.destroyer$.next({ status: 1 });
   }
 
   destroy() {

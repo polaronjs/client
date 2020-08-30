@@ -12,15 +12,17 @@ import { NewArticleComponent } from './new-article.component';
 import { EditorModule } from '@lazy/editor/editor.module';
 import { IncludedModule } from '@included/included.module';
 import { SelectModule } from '@lazy/select/select.module';
+import { TagsModule } from '@lazy/tags/tags.module';
 
 @NgModule({
   declarations: [NewArticleComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    EditorModule,
     IncludedModule,
+    EditorModule,
     SelectModule,
+    TagsModule,
   ],
 })
 export class NewArticleModule {}

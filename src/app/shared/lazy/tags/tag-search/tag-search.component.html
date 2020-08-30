@@ -1,0 +1,68 @@
+<div class="tags">
+  <ng-template #searchDropdownHandle>
+    <div #searchBar class="tags__search">
+      <p-icon name="tag"></p-icon>
+      <input
+        #searchInput
+        type="text"
+        placeholder="Add a tag..."
+        (input)="searchInput$.next($any($event.target).value)"
+        (focus)="searchInput.value && (dropdownVisible = true)"
+        (click)="searchInput.value && (dropdownVisible = true)"
+      />
+    </div>
+  </ng-template>
+  <p-dropdown
+    [handle]="searchDropdownHandle"
+    [visible]="dropdownVisible"
+    (close)="dropdownVisible = false"
+  >
+    <div
+      class="tags__dropdown"
+      [ngStyle]="{ minWidth: (dropdownWidth || 0) + 'px' }"
+    >
+      <ng-template
+        *ngIf="isSearching"
+        [ngTemplateOutlet]="dropdownLoadingTemplate"
+      ></ng-template>
+      <ng-container [ngTemplateOutlet]="dropdownResultsTemplate"></ng-container>
+    </div>
+  </p-dropdown>
+  <div class="tags__list">
+    <p-tag *ngFor="let tag of tags" [tag]="tag" (remove)="toggle(tag)"></p-tag>
+    <ng-container
+      *ngIf="!tags?.size"
+      [ngTemplateOutlet]="emptyTagsTemplate"
+    ></ng-container>
+  </div>
+</div>
+
+<ng-template #dropdownLoadingTemplate>
+  <div class="dropdown-loading">
+    <p-icon name="spinner-third" [spin]="true"></p-icon>
+    Loading...
+  </div>
+</ng-template>
+
+<ng-template #dropdownResultsTemplate>
+  <div class="dropdown-results">
+    <p-menu-list *ngIf="searchResults.length; else emptySearchTemplate">
+      <li *ngFor="let result of searchResults" (click)="toggle(result)">
+        <!-- TODO:NickW use a checkbox when selected -->
+        <span>{{ result }}</span>
+      </li>
+    </p-menu-list>
+  </div>
+</ng-template>
+
+<ng-template #emptySearchTemplate>
+  <div class="empty-results">
+    No results!
+  </div>
+</ng-template>
+
+<ng-template #emptyTagsTemplate>
+  <div class="empty-tags">
+    No tags yet!
+  </div>
+</ng-template>

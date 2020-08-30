@@ -5,11 +5,12 @@ import {
   TemplateRef,
   AfterViewInit,
   ViewChild,
+  HostListener,
+  ElementRef,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
-
-// TODO:NickW investigate supporting leave animations
+import { take, filter } from 'rxjs/operators';
+import { PortalDestroyEvent, PortalDestroyReason } from '../typings';
 
 @Component({
   selector: 'p-portal-host',
@@ -21,21 +22,30 @@ export class PortalHostComponent implements AfterViewInit {
 
   @Input() template!: TemplateRef<any>;
   @Input() data?: any;
-  @Input() destroyer$!: Subject<0 | 1>;
+  @Input() destroyer$!: Subject<PortalDestroyEvent>;
 
   showing = true;
 
-  constructor() {}
+  constructor(private host: ElementRef<HTMLElement>) {}
+
+  // TODO:NickW Consider externalizing the window click to a service with an observable
+  // to avoid multiple duplicate event handlers
+  @HostListener('window:click', ['$event.target'])
+  handleClicks(target: HTMLElement) {
+    if (!this.host.nativeElement.contains(target)) {
+      this.destroyer$.next({ status: 0, reason: PortalDestroyReason.CLICK });
+    }
+  }
 
   ngAfterViewInit(): void {
     this.destroyer$
       ?.pipe(
-        filter((value) => !value),
+        filter(({ status }) => !!status),
         take(1)
       )
       .subscribe(() => {
         this.showing = false;
-        this.destroyer$.next(1);
+        this.destroyer$.next({ status: 1 });
       });
 
     if (this.template) {

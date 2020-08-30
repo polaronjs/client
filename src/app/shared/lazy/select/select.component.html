@@ -17,16 +17,15 @@
 <p-dropdown [handle]="menuHandle" [visible]="!!open" (close)="open = false">
   <div [ngStyle]="{ minWidth: buttonWidth + 'px' }">
     <p-menu-list>
-      <ng-template *ngFor="let option of options">
-        <li
-          [ngClass]="{
-            selected: selected && selected === option
-          }"
-          (click)="selectedChange.emit(option); close()"
-        >
-          {{ option }}
-        </li>
-      </ng-template>
+      <li
+        *ngFor="let option of options"
+        [ngClass]="{
+          selected: selected && selected === option
+        }"
+        (click)="selectedChange.emit(option); close()"
+      >
+        {{ option }}
+      </li>
     </p-menu-list>
   </div>
 </p-dropdown>
